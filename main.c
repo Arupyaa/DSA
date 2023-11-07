@@ -9,7 +9,7 @@
 #include "ART_SORT.h"
 #include "ART_Search.h"
 #include "ART_Pattern.h"
-#define nottesting
+#define testing
 
 int arr1[] = { 32,-43,95,543,4,34 };
 
@@ -80,9 +80,12 @@ int main()
     }
 #endif //not testing
 #ifdef testing
-    //printf("%d", powermodulu(28, 3, 11));
-    //printf("index is %d", KMPSearch("ababcabcabababd", 15, "ababd", 5, 0));
-    printf("index is %d", KMPSearch("aba", 3 , "ababd", 5, 0));
+    int arr[] = {9,3,7,5,6,4,8,2,4};
+    printf("arr before sort:\n");
+    printArr(arr, 9);
+    mergeSort(arr, 9, findsmallerNumKey);
+    printf("arr after sort:\n");
+    printArr(arr, 9);
 #endif //testing
     char m[21];
     scanf("%s", m);

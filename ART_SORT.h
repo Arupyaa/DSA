@@ -12,4 +12,6 @@ void selectionSort(int* arr,int arrLen, int (*keySorter)(int,int));
 
 void insertionSort(int* arr,int arrLen, int (*keySorter)(int,int));
 
+void mergeSort(int* arr, int arrLen, int (*keySorter)(int, int));
+
 #endif /* ART_SORT_H_ */
