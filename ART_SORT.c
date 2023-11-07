@@ -10,6 +10,8 @@
 #include <math.h>
 #include "ART_SORT.h"
 
+void mergeSortR(int* arr, int startIndex, int endIndex, int* arr_t, int(*keySorter)(int, int));
+
 void selectionSort(int* arr, int arrLen, int (*keySorter)(int, int))
 {
     for (int i = 0; i < arrLen - 1; i++)
@@ -61,11 +63,11 @@ void mergeSort(int* arr, int arrLen, int(*keySorter)(int, int))
 
         for (int n = 0; n < arrLen; n += p_step)
         {
-            int i = n, j = n + p_step/2, k = n;
-            if ((p-1) % 2 == 0)
+            int i = n, j = n + p_step / 2, k = n;
+            if ((p - 1) % 2 == 0)
             {
                 //on even phases merge arr elements into arr_t
-                while (i < (n + p_step / 2) && i < arrLen && j < (n + p_step) &&j<arrLen)
+                while (i < (n + p_step / 2) && i < arrLen && j < (n + p_step) && j < arrLen)
                 {
                     arr_t[k++] = !keySorter(arr[i], arr[j]) ? arr[i++] : arr[j++];
                 }
@@ -94,6 +96,37 @@ void mergeSort(int* arr, int arrLen, int(*keySorter)(int, int))
     }
 
     if (arr_t != NULL && (p % 2) == 0)
-        memcpy(arr, arr_t, arrLen*sizeof(int));
+        memcpy(arr, arr_t, arrLen * sizeof(int));
     free(arr_t);
+}
+
+void mergeSortRecursive(int* arr, int startIndex, int endIndex, int(*keySorter)(int, int))
+{
+    int arrLen = endIndex - startIndex + 1;
+    int* arr_t = (int*)malloc(sizeof(int) * arrLen);
+    mergeSortR(arr, startIndex, endIndex, arr_t, keySorter);
+    free(arr_t);
+
+}
+
+void mergeSortR(int* arr, int startIndex, int endIndex, int* arr_t, int(*keySorter)(int, int))
+{
+    if (startIndex < endIndex)
+    {
+        int mid = (startIndex + endIndex) / 2;
+        mergeSortR(arr, startIndex, mid, arr_t, keySorter);
+        mergeSortR(arr, mid + 1, endIndex, arr_t, keySorter);
+        int i = startIndex, j = mid + 1, k = startIndex;
+        while (i <= mid && j <= endIndex)
+        {
+            arr_t[k++] = !keySorter(arr[i], arr[j]) ? arr[i++] : arr[j++];
+        }
+        for (; i <= mid; i++)
+            arr_t[k++] = arr[i];
+        for (; j <= endIndex; j++)
+            arr_t[k++] = arr[j];
+
+        int subArrLen = endIndex - startIndex + 1;
+        memcpy(&arr[startIndex], &arr_t[startIndex], subArrLen*sizeof(int));
+    }
 }

@@ -81,9 +81,11 @@ int main()
 #endif //not testing
 #ifdef testing
     int arr[] = {9,3,7,5,6,4,8,2,4};
+    //int arr[] = { 9,3,7,5};
     printf("arr before sort:\n");
     printArr(arr, 9);
-    mergeSort(arr, 9, findsmallerNumKey);
+    //mergeSort(arr, 9, findsmallerNumKey);
+    mergeSortRecursive(arr, 0, 9 - 1,findLargerNumKey);
     printf("arr after sort:\n");
     printArr(arr, 9);
 #endif //testing

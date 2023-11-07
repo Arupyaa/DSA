@@ -14,4 +14,6 @@ void insertionSort(int* arr,int arrLen, int (*keySorter)(int,int));
 
 void mergeSort(int* arr, int arrLen, int (*keySorter)(int, int));
 
+void mergeSortRecursive(int* arr, int startIndex, int endIndex, int(*keySorter)(int, int));
+
 #endif /* ART_SORT_H_ */
